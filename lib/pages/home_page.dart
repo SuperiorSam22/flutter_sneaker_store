@@ -47,10 +47,13 @@ class _HomePageState extends State<HomePage> {
         leading: Builder(
           builder: (context) {
             return IconButton(
-              icon:const Icon(
-                Icons.menu,
-                color: Colors.black,
-                ),
+              icon: const Padding(
+                padding:  EdgeInsets.only(left: 12.0),
+                child:  Icon(
+                  Icons.menu,
+                  color: Colors.black,
+                  ),
+              ),
               onPressed: () {
                 Scaffold.of(context).openDrawer();
               },
