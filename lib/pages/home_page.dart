@@ -99,7 +99,8 @@ class _HomePageState extends State<HomePage> {
 
             const Padding(
               padding: EdgeInsets.only(left: 25.0, bottom: 25),
-              child: ListTile(
+              child:
+               ListTile(
                 leading: Icon(Icons.logout, color: Colors.white,),
                 title: Text('logout', style: TextStyle(color: Colors.white),),
               ),
