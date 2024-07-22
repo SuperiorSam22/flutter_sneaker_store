@@ -1,5 +1,7 @@
+import 'package:e_commerce_application/models/cart.dart';
 import 'package:e_commerce_application/models/shoe.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../components/shoe_tile.dart';
 
@@ -11,9 +13,22 @@ class ShopPage extends StatefulWidget {
 }
 
 class _ShopPageState extends State<ShopPage> {
+
+  //add shoe to cart method 
+  //when the user click the + button shoe should be aded to the cart 
+  void addShoeToCart(Shoe shoe) {
+    Provider.of<Cart>(context, listen: false).addItemToCart(shoe);
+    //alert that the shoe was added into the cart 
+    showDialog(context: context, builder: (context) => const AlertDialog(
+      title: Text('Successfully Added !'),
+      content: Text('check your cart!'),
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Consumer<Cart>(builder: (context, value, child) => 
+    Column(
       //search bar
        children: [
         Container(
@@ -72,13 +87,10 @@ class _ShopPageState extends State<ShopPage> {
             itemCount: 4,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
-              Shoe shoe = Shoe(
-                name: 'Air Jordan',
-                price: '240',
-                imagePath: 'lib/images/pngwing.com (4).png',
-                description: 'cool shoe',
-              );
+              //get a shoe from shop list
+              Shoe shoe = value. getShoeList()[index];
               return ShoeTile(
+                onTap: () => addShoeToCart(shoe),
                 shoe: shoe,
               );
             },),),
@@ -95,6 +107,7 @@ class _ShopPageState extends State<ShopPage> {
             )
        ],
 
+    ),
     );
   }
 }

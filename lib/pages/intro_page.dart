@@ -19,7 +19,7 @@ class IntroPage extends StatelessWidget {
               //loog
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Image.asset('lib/images/pngwing.com (3).png',
+                    child: Image.asset('lib/images/nikelogo.png',
                     height: 240,
                     
                     ),
