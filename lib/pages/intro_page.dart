@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:flutter/widgets.dart";
 
 class IntroPage extends StatelessWidget {
   const IntroPage({super.key});
@@ -11,6 +12,7 @@ class IntroPage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               //loog
                   Padding(
@@ -43,13 +45,25 @@ class IntroPage extends StatelessWidget {
 
 
               //start now button
-              Container(
-                decoration: BoxDecoration(
-                  color:Colors.grey[900],
-                ),
-                child: Text('Shop Now!',
-                style: TextStyle(color: Colors.white),
-                
+              GestureDetector(
+                onTap: () => Navigator.push(
+                  context, MaterialPageRoute(
+                    builder: (context ) => HomePage),),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color:Colors.grey[900],
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  padding: const EdgeInsets.all(25.0),
+                  child: const Center(
+                    child: Text('Shop Now!',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      ),
+                    ),
+                  ),
                 ),
               )
             ],
