@@ -37,10 +37,28 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 216, 216, 216),
+      backgroundColor: const Color.fromARGB(255, 216, 216, 216),
       bottomNavigationBar: MyBottomNavBar(
         onTabChange: (index) => navigateBottomBar(index),
       ),
+      appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        leading: Builder(
+          builder: (context) {
+            return IconButton(
+              icon:const Icon(
+                Icons.menu,
+                color: Colors.black,
+                ),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            );
+          }
+        ),
+      ),
+      drawer: const Drawer(),
       body: _pages[_selectedIndex]  ,
     );
   }
