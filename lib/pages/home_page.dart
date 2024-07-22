@@ -58,7 +58,23 @@ class _HomePageState extends State<HomePage> {
           }
         ),
       ),
-      drawer: const Drawer(),
+      drawer: Drawer(
+        backgroundColor: const Color.fromARGB(255, 31, 31, 31),
+        child: Column(
+          children: [
+            //logo
+            DrawerHeader(child: Image.asset('lib/images/pngwing.com (3).png',
+            color: Colors.white,),),
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              child: Divider(color: Colors.grey[800],
+              ),
+            ),
+            //other pages
+          ],
+        ),
+      ),
       body: _pages[_selectedIndex]  ,
     );
   }
