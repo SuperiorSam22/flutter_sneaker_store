@@ -33,18 +33,42 @@ class ShoeTile extends StatelessWidget {
               ),
             ),
             //price + details
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                //shoe name 
-                Column(children: [
-                  Text(shoe.name),
-                  Text(shoe.price),
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  //shoe name 
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                    Text(shoe.name,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),),
+              
+                    const SizedBox(height: 5,), 
+              
+                    Text(
+                      '₹ ${shoe.price}', 
+                    style:const TextStyle(
+                      color: Colors.grey,
+                    ),),
+                  ],
+                ),
+                  //plus button
+                Container(
+                  padding: const EdgeInsets.all(20),
+                  decoration: const BoxDecoration(
+                     borderRadius:  BorderRadius.only(bottomRight: Radius.circular(12)),
+                    color: Colors.black),
+                    child: const Icon(Icons.add,
+                    color: Colors.white,
+                    ),
+                  ),
                 ],
               ),
-                //plus button
-              const Icon(Icons.add),
-              ],
             )
             //button add to cart 
           ],
