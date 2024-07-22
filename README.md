@@ -1,4 +1,4 @@
-# e_commerce_application
+# Flutter_sneaker_store
 
 A new Flutter project.
 
