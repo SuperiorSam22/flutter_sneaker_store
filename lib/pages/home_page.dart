@@ -70,7 +70,7 @@ class _HomePageState extends State<HomePage> {
             
             Column(
               children: [
-                DrawerHeader(child: Image.asset('lib/images/pngwing.com (3).png',
+                DrawerHeader(child: Image.asset('lib/images/niketick.png',
             color: Colors.white,),),
 
             Padding(

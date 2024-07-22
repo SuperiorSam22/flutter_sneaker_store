@@ -19,7 +19,7 @@ class _ShopPageState extends State<ShopPage> {
   void addShoeToCart(Shoe shoe) {
     Provider.of<Cart>(context, listen: false).addItemToCart(shoe);
     //alert that the shoe was added into the cart 
-    showDialog(context: context, builder: (context) => AlertDialog(
+    showDialog(context: context, builder: (context) => const AlertDialog(
       title: Text('Successfully Added !'),
       content: Text('check your cart!'),
     ));
