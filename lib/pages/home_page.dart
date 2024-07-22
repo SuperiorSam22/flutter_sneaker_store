@@ -61,9 +61,13 @@ class _HomePageState extends State<HomePage> {
       drawer: Drawer(
         backgroundColor: const Color.fromARGB(255, 31, 31, 31),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             //logo
-            DrawerHeader(child: Image.asset('lib/images/pngwing.com (3).png',
+            
+            Column(
+              children: [
+                DrawerHeader(child: Image.asset('lib/images/pngwing.com (3).png',
             color: Colors.white,),),
 
             Padding(
@@ -72,6 +76,31 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             //other pages
+            const Padding(
+              padding: EdgeInsets.only(left: 25.0),
+              child: ListTile(
+                leading: Icon(Icons.home, color: Colors.white,),
+                title: Text('home', style: TextStyle(color: Colors.white),),
+              ),
+            ),
+
+            const Padding(
+              padding: EdgeInsets.only(left: 25.0),
+              child: ListTile(
+                leading: Icon(Icons.info, color: Colors.white,),
+                title: Text('about', style: TextStyle(color: Colors.white),),
+              ),
+            ),
+              ],
+            ),
+
+            const Padding(
+              padding: EdgeInsets.only(left: 25.0, bottom: 25),
+              child: ListTile(
+                leading: Icon(Icons.logout, color: Colors.white,),
+                title: Text('logout', style: TextStyle(color: Colors.white),),
+              ),
+            ),
           ],
         ),
       ),
