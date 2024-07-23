@@ -1,5 +1,5 @@
+import 'package:e_commerce_application/auth/auth_page.dart';
 import 'package:e_commerce_application/pages/home_page.dart';
-import 'package:e_commerce_application/pages/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +15,7 @@ class MainPageRedirect extends StatelessWidget {
           if(snapshot.hasData){
             return const HomePage();
           } else {
-            return const LoginPage();
+            return const AuthPage();
           }
         },
       ) ,

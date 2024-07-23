@@ -1,26 +1,21 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatefulWidget {
-  final VoidCallback showRegisterPage;
-  const LoginPage({super.key, required this.showRegisterPage});
+class RegisterPage extends StatefulWidget {
+  final VoidCallback showLoginPage;
+  const RegisterPage({super.key, required this.showLoginPage});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
 
+class _RegisterPageState extends State<RegisterPage> {
+  
   // text controllers 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-
-  Future signIn() async {
-    await FirebaseAuth.instance
-    .signInWithEmailAndPassword(
-      email: _emailController.text.trim(), 
-      password: _passwordController.text);
-  }
+  final _confirmPasswordController = TextEditingController();
 
   @override
   void dispose() {
@@ -29,6 +24,23 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
+  Future signUp() async {
+    if(isPasswordConfirmed()){
+        await FirebaseAuth.instance
+      .createUserWithEmailAndPassword(
+        email: _emailController.text.trim(), 
+        password: _passwordController.text,
+      );
+    }
+  }
+
+  bool isPasswordConfirmed() {
+    if(_passwordController.text.trim() == _confirmPasswordController.text.trim()){
+      return true;
+    } else {
+      return false; 
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,14 +66,14 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 25,),
               //Hello again user! 
-              const Text('Hello Again!',
+              const Text('Hello There!',
                style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 30,
                ),
               ),
               const SizedBox(height: 10,),
-               const Text("Welcome back you've been missed!",
+               const Text("Register below with your details!",
                style: TextStyle(
                 fontSize: 20,
                ),
@@ -115,11 +127,35 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 10,),
 
+              //confirm password textfield 
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    border: Border.all(color: Colors.white),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: TextField(
+                      controller: _confirmPasswordController ,
+                      obscureText: true,
+                      decoration: const InputDecoration(  
+                        border: InputBorder.none,
+                        hintText: 'Confirm passoword',
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10,),
+
               //signin button 
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: GestureDetector(
-                  onTap: signIn,
+                  onTap: signUp,
                   child: Container(
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
@@ -127,7 +163,7 @@ class _LoginPageState extends State<LoginPage> {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: const Center(
-                      child: Text('Sign In', 
+                      child: Text('Register', 
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -143,12 +179,12 @@ class _LoginPageState extends State<LoginPage> {
               //register button ? not a member register now
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [ const Text('Not a member? ',
+                children: [ const Text('Alreay a member? ',
                   style: TextStyle(
                     fontWeight: FontWeight.bold),),
                   GestureDetector(
-                    onTap: widget.showRegisterPage,
-                    child: const Text('Register Now',
+                    onTap: widget.showLoginPage,
+                    child: const Text('Sign In',
                       style: TextStyle(
                         color: Colors.blue,
                         fontWeight: FontWeight.bold),
