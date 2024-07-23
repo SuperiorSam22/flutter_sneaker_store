@@ -11,27 +11,40 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:Color.fromARGB(255, 216, 216, 216),
+      backgroundColor:const Color.fromARGB(255, 216, 216, 216),
       body: 
       SafeArea(
         child: Center(
           child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 25,),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Image.asset('lib/images/niketick.png',
+                  height: 100,
+                  color: Colors.grey[500],
+                  ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 25,),
               //Hello again user! 
-              Text('Hello Again!',
+              const Text('Hello Again!',
                style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 24,
+                fontSize: 30,
                ),
               ),
-              SizedBox(height: 10,),
-               Text("Welcome back you've been missed!",
+              const SizedBox(height: 10,),
+               const Text("Welcome back you've been missed!",
                style: TextStyle(
                 fontSize: 20,
                ),
               ),
-              SizedBox(height: 20,),
+              const SizedBox(height: 25,),
 
               // email text field 
               Padding(
@@ -42,8 +55,8 @@ class _LoginPageState extends State<LoginPage> {
                     border: Border.all(color: Colors.white),
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.0),
                     child: TextField(
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -53,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
 
               //password textfield 
               Padding(
@@ -64,8 +77,8 @@ class _LoginPageState extends State<LoginPage> {
                     border: Border.all(color: Colors.white),
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.0),
                     child: TextField(
                       obscureText: true,
                       decoration: InputDecoration(  
@@ -76,18 +89,18 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
 
               //signin button 
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: Container(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
                     color: Colors.black,
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: Center(
+                  child: const Center(
                     child: Text('Sign In', 
                     style: TextStyle(
                       color: Colors.white,
@@ -98,10 +111,10 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 20,),
           
               //register button ? not a member register now
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text('Not a member? ',
@@ -113,6 +126,7 @@ class _LoginPageState extends State<LoginPage> {
                   )
                 ],
               ),
+            const SizedBox(height: 40,),
             ],
           ),
         ),
