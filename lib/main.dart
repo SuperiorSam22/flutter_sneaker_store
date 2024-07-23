@@ -1,5 +1,4 @@
-import 'package:e_commerce_application/pages/intro_page.dart';
-import 'package:e_commerce_application/pages/login_page.dart';
+import 'package:e_commerce_application/auth/main_pageRedirect.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +23,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(create: (context) => Cart(),
     builder: (context , child) => const MaterialApp(
       // home: IntroPage(),
-      home: LoginPage(),
+      home: MainPageRedirect(),
       debugShowCheckedModeBanner: false,
     ),
     );
