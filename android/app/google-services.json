@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "151418613417",
+    "project_id": "sneakerauth-8ecbf",
+    "storage_bucket": "sneakerauth-8ecbf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:151418613417:android:4d77dacbcaad34f62203b8",
+        "android_client_info": {
+          "package_name": "com.example.e_commerce_application"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOCqcBI1A_EnXErm56fNIy_fn1mwdyedY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
