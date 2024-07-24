@@ -1,3 +1,4 @@
+import 'package:e_commerce_application/components/custom_alert.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -25,26 +26,11 @@ class _ForgotpasswordPageState extends State<ForgotpasswordPage> {
     Future passwordReset() async {
     try {
         await FirebaseAuth.instance.sendPasswordResetEmail(email: _emailController.text.trim());
-        if(mounted){
-        showDialog(context: context, 
-        builder: (context) {
-          return AlertDialog(
-            content: Text('Pass reset link sent'),
-          );
-        });
-        }
+        return customAlert(context, 'success', 'Reset link to the registered email sent successfully!');
     } on FirebaseAuthException catch(e) {
-        print(e);
-        if(mounted){
-        showDialog(
-          context: context, 
-          builder: (context) {
-            return AlertDialog(
-              content: Text(e.message.toString()),
-            );
-          });
-        }
-      }
+        final result = e.message.toString();
+        return customAlert(context, 'failed', result);
+    }
     }
 
       

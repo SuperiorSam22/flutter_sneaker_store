@@ -1,3 +1,4 @@
+import 'package:e_commerce_application/components/custom_alert.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -25,13 +26,20 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Future signUp() async {
-    if(isPasswordConfirmed()){
-        await FirebaseAuth.instance
+    try {
+      if(isPasswordConfirmed()){
+      await FirebaseAuth.instance
       .createUserWithEmailAndPassword(
         email: _emailController.text.trim(), 
         password: _passwordController.text,
       );
-    }
+      } else {
+        customAlert(context, 'Incorrect Passowrd', 'Passowrds do not match');
+      }
+    } on FirebaseAuthException catch (e) {
+       final error = e.message.toString();
+       return customAlert(context, 'Invalid email format', 'Please enter the email in correct format\nexample@gmail.com');
+    }   
   }
 
   bool isPasswordConfirmed() {
@@ -119,7 +127,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       obscureText: true,
                       decoration: const InputDecoration(  
                         border: InputBorder.none,
-                        hintText: 'Passoword',
+                        hintText: 'Password',
                       ),
                     ),
                   ),
@@ -179,7 +187,7 @@ class _RegisterPageState extends State<RegisterPage> {
               //register button ? not a member register now
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [ const Text('Alreay a member? ',
+                children: [ const Text('Already a member? ',
                   style: TextStyle(
                     fontWeight: FontWeight.bold),),
                   GestureDetector(
