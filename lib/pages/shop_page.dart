@@ -15,6 +15,8 @@ class ShopPage extends StatefulWidget {
 
 class _ShopPageState extends State<ShopPage> {
 
+  final _searchController = TextEditingController(); 
+
   //add shoe to cart method 
   //when the user click the + button shoe should be aded to the cart 
   void addShoeToCart(Shoe shoe) {
@@ -27,31 +29,36 @@ class _ShopPageState extends State<ShopPage> {
   }
 
   @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Consumer<Cart>(builder: (context, value, child) => 
+    
     Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       //search bar
        children: [
         Container(
-          padding: const EdgeInsets.all(12),
-          margin: const EdgeInsets.symmetric(horizontal: 25),
+          margin: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 25),
           decoration: BoxDecoration(
-            color: Colors.grey[200],
-            borderRadius: BorderRadius.circular(8),
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12),
           ),
-          child: const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Search'),
-              Icon(
-                Icons.search,
-                color: Colors.grey,
-              ),
-          ],
-          
+          child: TextField(
+            controller: _searchController,
+            decoration: const InputDecoration(
+              hintText: 'Search',
+              border: InputBorder.none,
+            ),
           ),
         ),
-        //message 
+
+       //message 
         const Padding(
           padding: EdgeInsets.symmetric(vertical: 25.0),
           child: Text('Everyone flies... Some fly longer than others!'),

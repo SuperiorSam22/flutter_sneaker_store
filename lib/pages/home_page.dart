@@ -101,7 +101,7 @@ class _HomePageState extends State<HomePage> {
             ),
 
             Padding(
-              padding: EdgeInsets.only(left: 25.0, bottom: 25),
+              padding: const EdgeInsets.only(left: 25.0, bottom: 25),
               child:
                GestureDetector(
                 onTap: () {
@@ -116,7 +116,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      body: _pages[_selectedIndex]  ,
+      body: _pages[_selectedIndex],
     );
   }
 }
