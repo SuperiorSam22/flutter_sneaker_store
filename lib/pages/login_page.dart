@@ -2,6 +2,8 @@ import 'package:e_commerce_application/pages/forgotPassword_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../components/custom_alert.dart';
+
 class LoginPage extends StatefulWidget {
   final VoidCallback showRegisterPage;
   const LoginPage({super.key, required this.showRegisterPage});
@@ -23,22 +25,13 @@ class _LoginPageState extends State<LoginPage> {
       email: _emailController.text.trim(), 
       password: _passwordController.text);
     } on FirebaseAuthException catch (e) {
-      showDialog(
-          context: context, 
-          builder: (context) {
-            return AlertDialog(
-              content:  SingleChildScrollView(
-              child: ListBody(
-              children: <Widget>[
-              Text(e.message.toString()),
-              const Text('Please enter the email in correct format\nexample@gmail.com'),
-            ],
-          ),
-        ),
-
-              
-            );
-          });
+      final error = e.message.toString();
+        if(_emailController.text.isEmpty){
+          return customAlert(context, 'Email not found', 'Please enter a valid email');
+        } else if (_passwordController.text.isEmpty) {
+          return customAlert(context, 'Password not found', 'Please enter a password');
+        }
+       return customAlert(context, 'Invalid email format', 'Please enter the email in correct format\nexample@gmail.com');
     }
     
   }
