@@ -25,13 +25,30 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Future signUp() async {
-    if(isPasswordConfirmed()){
-        await FirebaseAuth.instance
+    try {
+      if(isPasswordConfirmed()){
+      await FirebaseAuth.instance
       .createUserWithEmailAndPassword(
         email: _emailController.text.trim(), 
         password: _passwordController.text,
       );
-    }
+      }  
+    } on FirebaseAuthException catch (e) {
+      showDialog(
+          context: context, 
+          builder: (context) {
+            return AlertDialog(
+              content:  SingleChildScrollView(
+              child: ListBody(
+              children: <Widget>[
+              Text(e.message.toString()),
+              const Text('Please enter the email in correct format\nexample@gmail.com'),
+            ],
+          ),
+        ),    
+        );
+      }); 
+    }   
   }
 
   bool isPasswordConfirmed() {
