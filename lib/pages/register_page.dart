@@ -33,7 +33,9 @@ class _RegisterPageState extends State<RegisterPage> {
         email: _emailController.text.trim(), 
         password: _passwordController.text,
       );
-      }  
+      } else {
+        customAlert(context, 'Incorrect Passowrd', 'Passowrds do not match');
+      }
     } on FirebaseAuthException catch (e) {
        final error = e.message.toString();
        return customAlert(context, 'Invalid email format', 'Please enter the email in correct format\nexample@gmail.com');
