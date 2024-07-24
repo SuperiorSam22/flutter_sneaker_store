@@ -81,4 +81,12 @@ class Cart extends ChangeNotifier{
     notifyListeners();
   }
 
+  int getTotalItemsInCart() {
+    return userCart.fold(0, (total, current) => total + current.quantity);
+  }
+
+  double getTotalCartAmount() {
+    return userCart.fold(0, (total, current) => total + (current.quantity * double.parse(current.price.replaceAll(',', ''))));
+  }
+
 }

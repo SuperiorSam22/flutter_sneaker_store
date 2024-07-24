@@ -25,7 +25,6 @@ class _LoginPageState extends State<LoginPage> {
       email: _emailController.text.trim(), 
       password: _passwordController.text);
     } on FirebaseAuthException catch (e) {
-      final error = e.message.toString();
         if(_emailController.text.isEmpty){
           return customAlert(context, 'Email not found', 'Please enter a valid email');
         } else if (_passwordController.text.isEmpty) {
