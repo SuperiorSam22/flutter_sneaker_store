@@ -28,8 +28,8 @@ class _ForgotpasswordPageState extends State<ForgotpasswordPage> {
         await FirebaseAuth.instance.sendPasswordResetEmail(email: _emailController.text.trim());
         return customAlert(context, 'success', 'Reset link to the registered email sent successfully!');
     } on FirebaseAuthException catch(e) {
-          final result = e.message.toString();
-          return customAlert(context, 'failed', result);
+        final result = e.message.toString();
+        return customAlert(context, 'failed', result);
     }
     }
 

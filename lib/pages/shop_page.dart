@@ -1,3 +1,4 @@
+import 'package:e_commerce_application/components/custom_alert.dart';
 import 'package:e_commerce_application/models/cart.dart';
 import 'package:e_commerce_application/models/shoe.dart';
 import 'package:flutter/material.dart';
@@ -19,10 +20,10 @@ class _ShopPageState extends State<ShopPage> {
   void addShoeToCart(Shoe shoe) {
     Provider.of<Cart>(context, listen: false).addItemToCart(shoe);
     //alert that the shoe was added into the cart 
-    showDialog(context: context, builder: (context) => const AlertDialog(
-      title: Text('Successfully Added !'),
-      content: Text('check your cart!'),
-    ));
+    customAlert(context, 
+    'Added', 
+    'Item was successfully added in your cart'
+    );
   }
 
   @override

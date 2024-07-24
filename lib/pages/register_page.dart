@@ -1,3 +1,4 @@
+import 'package:e_commerce_application/components/custom_alert.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -34,20 +35,8 @@ class _RegisterPageState extends State<RegisterPage> {
       );
       }  
     } on FirebaseAuthException catch (e) {
-      showDialog(
-          context: context, 
-          builder: (context) {
-            return AlertDialog(
-              content:  SingleChildScrollView(
-              child: ListBody(
-              children: <Widget>[
-              Text(e.message.toString()),
-              const Text('Please enter the email in correct format\nexample@gmail.com'),
-            ],
-          ),
-        ),    
-        );
-      }); 
+       final error = e.message.toString();
+       return customAlert(context, 'Invalid email format', 'Please enter the email in correct format\nexample@gmail.com');
     }   
   }
 
@@ -136,7 +125,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       obscureText: true,
                       decoration: const InputDecoration(  
                         border: InputBorder.none,
-                        hintText: 'Passoword',
+                        hintText: 'Password',
                       ),
                     ),
                   ),
@@ -196,7 +185,7 @@ class _RegisterPageState extends State<RegisterPage> {
               //register button ? not a member register now
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [ const Text('Alreay a member? ',
+                children: [ const Text('Already a member? ',
                   style: TextStyle(
                     fontWeight: FontWeight.bold),),
                   GestureDetector(
