@@ -59,8 +59,8 @@ class _RegisterPageState extends State<RegisterPage> {
     await FirebaseFirestore.instance.collection('users').add({
       'first_name' : _firstNameController.text.trim(),
       'last_name' : _lastNameController.text.trim(),
-      'age' :  _emailController.text.trim(),
-      'email' : int.parse(_ageController.text.trim()),
+      'age' :  int.parse(_ageController.text.trim()),
+      'email' : _emailController.text.trim(),
     });
   }
 

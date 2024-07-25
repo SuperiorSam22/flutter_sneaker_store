@@ -25,7 +25,9 @@ class MyBottomNavBar extends StatelessWidget {
           text: 'cart',
           ),
           GButton(icon: Icons.search,
-          text: 'search',)
+          text: 'search',),
+          GButton(icon: Icons.person,
+          text: 'profile',)
 
       ],),
     );
