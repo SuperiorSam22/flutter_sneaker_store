@@ -35,7 +35,7 @@ class _SearchPageState extends State<SearchPage> {
             child: Column(
               children: [
                 TextField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: 'Search',
                     border: InputBorder.none,
                   ),
@@ -48,6 +48,12 @@ class _SearchPageState extends State<SearchPage> {
               ],
             ),
           ),
+          const SizedBox(height: 10,),
+
+          const Text('Available items to search',
+          style: TextStyle(
+            color: Colors.grey,
+          ),),
           //to display searched items
           Expanded(
             child: Consumer<Cart>(
@@ -62,20 +68,39 @@ class _SearchPageState extends State<SearchPage> {
                     Shoe shoe = searchResults[index];
                     return Column(
                       children: [
-                        ListTile(
-                          title: Text(shoe.name),
-                          subtitle: Text(shoe.price),
-                          leading: Image.asset(shoe.imagePath),
-                          trailing: IconButton( 
-                          onPressed: () {
-                            cart.addItemToCart(shoe);
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text('${shoe.name} added to cart'),
-                              ),
-                            );
-                          }, icon: Icon(Icons.shopping_bag),),
+                        Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: ListTile(
+                            title: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                              child: Text(shoe.name),
+                            ),
+                            subtitle: Text(shoe.price),
+                            leading: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Image.asset(shoe.imagePath, 
+                              fit: BoxFit.cover,),
+                            ),
+                            onTap: () {
+                              //lead to the details page
 
+                            },
+                            trailing: IconButton( 
+                            onPressed: () {
+                              cart.addItemToCart(shoe);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('${shoe.name} added to cart'),
+                                  
+                                ),
+                              );
+                            }, icon: const Icon(Icons.shopping_bag),),
+                          
+                          ),
                         ),
                       ],
                     );
