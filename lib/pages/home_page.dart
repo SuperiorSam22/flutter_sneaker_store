@@ -1,4 +1,5 @@
 import "package:e_commerce_application/components/bottom_nav_bar.dart";
+import "package:e_commerce_application/pages/search_page.dart";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 
@@ -34,6 +35,8 @@ class _HomePageState extends State<HomePage> {
     const ShopPage(),
     //cart page
     const CartPage(),
+    //search page
+    const SearchPage(),
   ];
 
 
