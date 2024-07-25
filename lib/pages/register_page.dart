@@ -14,10 +14,8 @@ class RegisterPage extends StatefulWidget {
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
-
 class _RegisterPageState extends State<RegisterPage> {
-  
-  // text controllers 
+  // text controllers
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
@@ -37,81 +35,93 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Future signUp() async {
     try {
-      if(isPasswordConfirmed()){
+      if (isPasswordConfirmed()) {
         //create user
-      await FirebaseAuth.instance
-      .createUserWithEmailAndPassword(
-        email: _emailController.text.trim(), 
-        password: _passwordController.text, 
-      );
-      //add user details 
-      await addUserDetails();
+        UserCredential userCredential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text,
+        );
+        //after creating a new user create a new document in the cloud
+        FirebaseFirestore.instance
+            .collection('users')
+            .doc(userCredential.user?.email!)
+            .set({
+              'userName': _emailController.text.split('@')[0],
+              'firstName' : _firstNameController.text.trim(),
+              'lastName' : _lastNameController.text.trim(),
+              'email': _emailController.text.trim(),
+              'age' : int.parse(_ageController.text.trim()),
+            });
+
+        
       } else {
         customAlert(context, 'Incorrect Passowrd', 'Passowrds do not match');
-      } 
+      }
     } on FirebaseAuthException catch (e) {
-       final error = e.message.toString();
-       return customAlert(context, error, 'Please enter the email in correct format\nexample@gmail.com');
-    }   
-  }
-
-  Future addUserDetails() async {
-    await FirebaseFirestore.instance.collection('users').add({
-      'first_name' : _firstNameController.text.trim(),
-      'last_name' : _lastNameController.text.trim(),
-      'age' :  int.parse(_ageController.text.trim()),
-      'email' : _emailController.text.trim(),
-    });
+      final error = e.message.toString();
+      return customAlert(context, error,
+          'Please enter the email in correct format\nexample@gmail.com');
+    }
   }
 
   bool isPasswordConfirmed() {
-    if(_passwordController.text.trim() == _confirmPasswordController.text.trim()){
+    if (_passwordController.text.trim() ==
+        _confirmPasswordController.text.trim()) {
       return true;
     } else {
-      return false; 
+      return false;
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:const Color.fromARGB(255, 216, 216, 216),
-      body: 
-      SafeArea(
+      backgroundColor: const Color.fromARGB(255, 216, 216, 216),
+      body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
             child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Image.asset('lib/images/niketick.png',
-                    height: 100,
-                    color: Colors.grey[500],
-                    ),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Image.asset(
+                        'lib/images/niketick.png',
+                        height: 100,
+                        color: Colors.grey[500],
+                      ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 25,),
-                //Hello again user! 
-                const Text('Hello There!',
-                 style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 30,
-                 ),
+                const SizedBox(
+                  height: 25,
                 ),
-                const SizedBox(height: 10,),
-                 const Text("Register below with your details!",
-                 style: TextStyle(
-                  fontSize: 20,
-                 ),
+                //Hello again user!
+                const Text(
+                  'Hello There!',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30,
+                  ),
                 ),
-                const SizedBox(height: 25,),
-            
-                // firstName text field 
+                const SizedBox(
+                  height: 10,
+                ),
+                const Text(
+                  "Register below with your details!",
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+                const SizedBox(
+                  height: 25,
+                ),
+
+                // firstName text field
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: Container(
@@ -133,9 +143,11 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 10,),
-            
-                // lastName text field 
+                const SizedBox(
+                  height: 10,
+                ),
+
+                // lastName text field
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: Container(
@@ -157,9 +169,11 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 10,),
+                const SizedBox(
+                  height: 10,
+                ),
 
-                // lastName text field 
+                // lastName text field
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: Container(
@@ -181,9 +195,11 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 10,),
-            
-                // email text field 
+                const SizedBox(
+                  height: 10,
+                ),
+
+                // email text field
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: Container(
@@ -205,9 +221,11 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 10,),
-            
-                //password textfield 
+                const SizedBox(
+                  height: 10,
+                ),
+
+                //password textfield
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: Container(
@@ -219,9 +237,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: TextField(
-                        controller: _passwordController ,
+                        controller: _passwordController,
                         obscureText: true,
-                        decoration: const InputDecoration(  
+                        decoration: const InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Password',
                           hintStyle: TextStyle(color: Colors.grey),
@@ -230,9 +248,11 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 10,),
-            
-                //confirm password textfield 
+                const SizedBox(
+                  height: 10,
+                ),
+
+                //confirm password textfield
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: Container(
@@ -244,9 +264,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: TextField(
-                        controller: _confirmPasswordController ,
+                        controller: _confirmPasswordController,
                         obscureText: true,
-                        decoration: const InputDecoration(  
+                        decoration: const InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Confirm passoword',
                           hintStyle: TextStyle(color: Colors.grey),
@@ -255,9 +275,11 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 10,),
-            
-                //signin button 
+                const SizedBox(
+                  height: 10,
+                ),
+
+                //signin button
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: GestureDetector(
@@ -269,36 +291,43 @@ class _RegisterPageState extends State<RegisterPage> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: const Center(
-                        child: Text('Register', 
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
+                        child: Text(
+                          'Register',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
                           ),
-                          ),
+                        ),
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(height: 20,),
-            
+                const SizedBox(
+                  height: 20,
+                ),
+
                 //register button ? not a member register now
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [ const Text('Already a member? ',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold),),
+                  children: [
+                    const Text(
+                      'Already a member? ',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                     GestureDetector(
                       onTap: widget.showLoginPage,
-                      child: const Text('Sign In',
+                      child: const Text(
+                        'Sign In',
                         style: TextStyle(
-                          color: Colors.blue,
-                          fontWeight: FontWeight.bold),
+                            color: Colors.blue, fontWeight: FontWeight.bold),
                       ),
                     )
                   ],
                 ),
-              const SizedBox(height: 40,),
+                const SizedBox(
+                  height: 40,
+                ),
               ],
             ),
           ),
