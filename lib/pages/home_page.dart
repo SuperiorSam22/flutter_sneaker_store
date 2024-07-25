@@ -1,4 +1,5 @@
 import "package:e_commerce_application/components/bottom_nav_bar.dart";
+import "package:e_commerce_application/pages/search_page.dart";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 
@@ -34,6 +35,8 @@ class _HomePageState extends State<HomePage> {
     const ShopPage(),
     //cart page
     const CartPage(),
+    //search page
+    const SearchPage(),
   ];
 
 
@@ -101,7 +104,7 @@ class _HomePageState extends State<HomePage> {
             ),
 
             Padding(
-              padding: EdgeInsets.only(left: 25.0, bottom: 25),
+              padding: const EdgeInsets.only(left: 25.0, bottom: 25),
               child:
                GestureDetector(
                 onTap: () {
@@ -116,7 +119,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      body: _pages[_selectedIndex]  ,
+      body: _pages[_selectedIndex],
     );
   }
 }

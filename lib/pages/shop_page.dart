@@ -15,6 +15,7 @@ class ShopPage extends StatefulWidget {
 
 class _ShopPageState extends State<ShopPage> {
 
+
   //add shoe to cart method 
   //when the user click the + button shoe should be aded to the cart 
   void addShoeToCart(Shoe shoe) {
@@ -29,29 +30,11 @@ class _ShopPageState extends State<ShopPage> {
   @override
   Widget build(BuildContext context) {
     return Consumer<Cart>(builder: (context, value, child) => 
+    
     Column(
-      //search bar
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
        children: [
-        Container(
-          padding: const EdgeInsets.all(12),
-          margin: const EdgeInsets.symmetric(horizontal: 25),
-          decoration: BoxDecoration(
-            color: Colors.grey[200],
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Search'),
-              Icon(
-                Icons.search,
-                color: Colors.grey,
-              ),
-          ],
-          
-          ),
-        ),
-        //message 
+       //message 
         const Padding(
           padding: EdgeInsets.symmetric(vertical: 25.0),
           child: Text('Everyone flies... Some fly longer than others!'),
