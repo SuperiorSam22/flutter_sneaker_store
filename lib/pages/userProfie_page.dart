@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:e_commerce_application/components/custom_alert.dart';
 import 'package:e_commerce_application/components/text_box.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -20,71 +22,89 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.grey[300],
-        body: ListView(
-          children: [
-            const SizedBox(
-              height: 50,
-            ),
-            //profile pic
-            const Icon(
-              Icons.person,
-              size: 72,
-            ),
+        body: StreamBuilder<DocumentSnapshot>(
+          stream: FirebaseFirestore.instance
+              .collection('users')
+              .doc(currentUser.email)
+              .snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              final userData = snapshot.data!.data() as Map<String, dynamic>;
 
-            const SizedBox(
-              height: 10,
-            ),
-            //user email
-            Text(
-              currentUser.email!,
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.grey[700]),
-            ),
+              return ListView(
+                children: [
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  //profile pic
+                  const Icon(
+                    Icons.person,
+                    size: 72,
+                  ),
 
-            //user details
-            Padding(
-              padding: const EdgeInsets.only(left: 25.0),
-              child: Text(
-                'My details',
-                style: TextStyle(color: Colors.grey[600]),
-              ),
-            ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  //user email
+                  Text(
+                    currentUser.email!,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.grey[700]),
+                  ),
 
-            //username
-            MyTextBox(
-              text: 'Sandeep',
-              sectionName: 'username',
-              onPressed: () => editField('username'),
-            ),
+                  //user details
+                  Padding(
+                    padding: const EdgeInsets.only(left: 25.0),
+                    child: Text(
+                      'My details',
+                      style: TextStyle(color: Colors.grey[600]),
+                    ),
+                  ),
 
-            //firstName 
-            MyTextBox(
-              text: 'Sandeep',
-              sectionName: 'firstName',
-              onPressed: () => editField('firstName'),
-            ),
+                  //username
+                  MyTextBox(
+                    text: userData['userName'],
+                    sectionName: 'username',
+                    onPressed: () => editField('username'),
+                  ),
 
-            //lastName
-             MyTextBox(
-              text: 'Sandeep',
-              sectionName: 'lastName',
-              onPressed: () => editField('lastName'),
-            ),
+                  //firstName
+                  MyTextBox(
+                    text: userData['firstName'],
+                    sectionName: 'firstName',
+                    onPressed: () => editField('firstName'),
+                  ),
 
-             //mobile no 
-             MyTextBox(
-              text: 'xxxxxxxxxx',
-              sectionName: 'mobile',
-              onPressed: () => editField('mobile'),
-            ),
+                  //lastName
+                  MyTextBox(
+                    text: userData['lastName'],
+                    sectionName: 'lastName',
+                    onPressed: () => editField('lastName'),
+                  ),
 
-            //address
-            MyTextBox(
-              text: 'address',
-              sectionName: 'address',
-              onPressed: () => editField('address'),
-            ),
-          ],
+                  //mobile no
+                  MyTextBox(
+                    text: 'xxxxxxxxxx',
+                    sectionName: 'mobile',
+                    onPressed: () => editField('mobile'),
+                  ),
+
+                  //address
+                  MyTextBox(
+                    text: 'address',
+                    sectionName: 'address',
+                    onPressed: () => editField('address'),
+                  ),
+                ],
+              );
+            } else if(snapshot.hasError) {
+              customAlert(context, snapshot.error.toString(), 'something wrong happened');
+            }
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          },
+          
         ));
   }
 }
