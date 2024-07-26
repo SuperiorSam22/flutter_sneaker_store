@@ -30,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
         } else if (_passwordController.text.isEmpty) {
           return customAlert(context, 'Password not found', 'Please enter a password');
         }
-       return customAlert(context, 'Invalid email format', 'Please enter the email in correct format\nexample@gmail.com');
+       return customAlert(context, e.message.toString(), 'Please enter the email in correct format\nexample@gmail.com');
     }
     
   }

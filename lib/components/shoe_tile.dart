@@ -12,7 +12,7 @@ class ShoeTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 40.0),
       child: Container(
-        margin:const  EdgeInsets.only(left: 25),
+        margin: const EdgeInsets.only(left: 25),
         width: 300,
         decoration: BoxDecoration(
           color: Colors.grey[100],
@@ -21,7 +21,7 @@ class ShoeTile extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            //shoe picture 
+            //shoe picture
             SizedBox(
               height: 300,
               width: 300,
@@ -37,7 +37,7 @@ class ShoeTile extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: Text(
-                    shoe.description, 
+                    shoe.description,
                     style: TextStyle(
                       color: Colors.grey[600],
                     ),
@@ -52,42 +52,47 @@ class ShoeTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  //shoe name 
+                  //shoe name
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                    Text(shoe.name,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),),
-              
-                    const SizedBox(height: 5,), 
-              
-                    Text(
-                      '₹ ${shoe.price}', 
-                    style:const TextStyle(
-                      color: Colors.grey,
-                    ),),
-                  ],
-                ),
+                      Text(
+                        shoe.name,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        '₹ ${shoe.price}',
+                        style: const TextStyle(
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ],
+                  ),
                   //plus button
-                GestureDetector(
-                  onTap: onTap,
-                  child: Container(
-                    padding: const EdgeInsets.all(20),
-                    decoration: const BoxDecoration(
-                       borderRadius:  BorderRadius.only(bottomRight: Radius.circular(12)),
-                      color: Colors.black),
-                      child: const Icon(Icons.add,
-                      color: Colors.white,
+                  GestureDetector(
+                    onTap: onTap,
+                    child: Container(
+                      padding: const EdgeInsets.all(20),
+                      decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(12)),
+                          color: Colors.black),
+                      child: const Icon(
+                        Icons.add,
+                        color: Colors.white,
                       ),
                     ),
-                ),
+                  ),
                 ],
               ),
             )
-            //button add to cart 
+            //button add to cart
           ],
         ),
       ),
